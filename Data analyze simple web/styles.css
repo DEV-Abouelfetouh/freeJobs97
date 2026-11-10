@@ -1,0 +1,308 @@
+/* ==================== BASE ==================== */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: #f1f5f9;
+  color: #0f172a;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.hidden { display: none !important; }
+code {
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 13px;
+  direction: ltr;
+  display: inline-block;
+}
+.muted { color: #64748b; font-size: 14px; }
+.hint { color: #64748b; font-size: 12px; text-align: center; margin: 4px 0 0; }
+
+/* ==================== LOGIN ==================== */
+#loginView {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+}
+.login-card {
+  background: #fff;
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.login-card .logo { font-size: 48px; text-align: center; line-height: 1; }
+.login-card h1 { margin: 0; text-align: center; font-size: 24px; }
+
+/* ==================== TOPBAR ==================== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand { font-weight: 700; font-size: 18px; }
+.userbox { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.banner {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 10px 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+/* ==================== LAYOUT ==================== */
+main {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+.card h2 { margin: 0 0 10px; font-size: 18px; }
+
+/* ==================== FORM ELEMENTS ==================== */
+input, select, textarea {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  color: inherit;
+  width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px #dbeafe;
+}
+textarea { resize: vertical; min-height: 70px; }
+label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.row > input,
+.row > select,
+.row > label,
+.row > textarea { flex: 1 1 180px; }
+.row > button { flex: 0 0 auto; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: background .15s, transform .05s;
+  white-space: nowrap;
+}
+.btn:hover { background: #eef2f7; }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.primary { background: #2563eb; color: #fff; border-color: #2563eb; }
+.btn.primary:hover { background: #1d4ed8; }
+.btn.success { background: #16a34a; color: #fff; border-color: #16a34a; }
+.btn.success:hover { background: #15803d; }
+.btn.danger { background: #dc2626; color: #fff; border-color: #dc2626; }
+.btn.danger:hover { background: #b91c1c; }
+.btn.ghost { background: transparent; }
+.btn.sm { padding: 6px 10px; font-size: 13px; }
+.btn.block { width: 100%; }
+
+/* ==================== FILE DROP ==================== */
+.file-drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84px;
+  padding: 16px;
+  border: 2px dashed #93c5fd;
+  border-radius: 12px;
+  background: #eff6ff;
+  cursor: pointer;
+  text-align: center;
+  color: #1d4ed8;
+  flex: 2 1 320px;
+  transition: background .15s, border-color .15s;
+}
+.file-drop:hover { background: #dbeafe; }
+.file-drop.drag { background: #bfdbfe; border-color: #2563eb; }
+.month-field { flex: 1 1 180px; }
+
+/* ==================== STATS ==================== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+.stat {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.stat span { font-size: 13px; color: #64748b; }
+.stat strong { font-size: 20px; }
+.stat.warn { background: #fef3c7; border-color: #fcd34d; }
+.stat.ok { background: #dcfce7; border-color: #86efac; }
+.stat.bad { background: #fee2e2; border-color: #fca5a5; }
+
+/* ==================== TABLE ==================== */
+.table-wrap {
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  max-height: 65vh;
+}
+table { width: 100%; border-collapse: collapse; min-width: 820px; }
+th, td {
+  padding: 10px 12px;
+  text-align: right;
+  border-bottom: 1px solid #eef2f7;
+  font-size: 14px;
+  vertical-align: middle;
+}
+thead th {
+  background: #f8fafc;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-weight: 600;
+}
+tfoot th { background: #f8fafc; font-weight: 600; position: sticky; bottom: 0; }
+tbody tr:hover { background: #f8fafc; }
+td.mismatch { color: #b45309; font-weight: 600; }
+.empty { text-align: center; color: #64748b; padding: 24px; }
+
+/* ==================== BADGES ==================== */
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #e2e8f0;
+  color: #334155;
+  white-space: nowrap;
+}
+.badge.ok { background: #dcfce7; color: #166534; }
+.badge.bad { background: #fee2e2; color: #991b1b; }
+.badge.warn { background: #fef3c7; color: #92400e; }
+
+/* ==================== MESSAGES ==================== */
+.msg { font-size: 14px; min-height: 1.2em; }
+.msg.error { color: #b91c1c; }
+.msg.success { color: #15803d; }
+
+/* ==================== USER SALARY CARD ==================== */
+.salary-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #f8fafc;
+}
+.salary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.salary-head strong { font-size: 16px; }
+.salary-card .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+.salary-card .k { display: block; font-size: 12px; color: #64748b; }
+.salary-card .v { font-size: 18px; font-weight: 700; }
+
+/* ==================== DIALOG ==================== */
+dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 24px;
+  width: min(420px, 92vw);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .3);
+}
+dialog::backdrop { background: rgba(15, 23, 42, .5); }
+dialog h3 { margin-top: 0; }
+dialog label { margin-bottom: 10px; }
+dialog menu {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+/* ==================== TOAST ==================== */
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #0f172a;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 1000;
+  font-size: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 640px) {
+  .topbar { flex-direction: column; align-items: stretch; }
+  .userbox { justify-content: space-between; }
+  main { padding: 0 12px; margin: 12px auto; }
+  .card { padding: 14px; }
+  .row > button { width: 100%; }
+}

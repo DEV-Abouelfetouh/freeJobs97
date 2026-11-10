@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كشف الرواتب | نظام التحقق</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<!-- ==================== LOGIN ==================== -->
+<div id="loginView" class="view">
+  <form id="loginForm" class="login-card" autocomplete="on">
+    <div class="logo">💰</div>
+    <h1>كشف الرواتب</h1>
+    <p class="muted" style="text-align:center;margin:0 0 8px">سجّل الدخول لعرض بياناتك</p>
+
+    <label>اسم المستخدم
+      <input id="loginUser" autocomplete="username" required>
+    </label>
+    <label>كلمة المرور
+      <input id="loginPass" type="password" autocomplete="current-password" required>
+    </label>
+
+    <button type="submit" class="btn primary block">دخول</button>
+    <div id="loginMsg" class="msg error"></div>
+    <p class="hint">المدير الافتراضي: <code>admin</code> / <code>admin123</code></p>
+  </form>
+</div>
+
+<!-- ==================== APP ==================== -->
+<div id="appView" class="view hidden">
+  <header class="topbar">
+    <div class="brand">💰 كشف الرواتب</div>
+    <div class="userbox">
+      <span id="whoami" class="muted"></span>
+      <button id="btnChangePass" class="btn ghost sm">تغيير كلمة المرور</button>
+      <button id="btnLogout" class="btn ghost sm">خروج</button>
+    </div>
+  </header>
+
+  <div id="pwBanner" class="banner hidden">
+    ⚠️ أنت تستخدم كلمة مرور افتراضية، يُفضّل تغييرها الآن.
+    <button id="btnChangePass2" class="btn sm">تغيير</button>
+  </div>
+
+  <main>
+    <!-- ---------- ADMIN ---------- -->
+    <section id="adminPanel" class="hidden">
+
+      <div class="card">
+        <h2>📥 استيراد ملف Excel</h2>
+        <p class="muted">
+          الأعمدة المدعومة (عربي أو إنجليزي):
+          <code>name</code> / <code>الاسم</code> •
+          <code>abcen</code> / <code>الغياب</code> •
+          <code>minus</code> / <code>الخصم</code> •
+          <code>salary</code> / <code>الراتب</code> •
+          <code>natSalary</code> / <code>صافي الراتب</code>
+        </p>
+        <div class="row">
+          <label class="file-drop" id="dropZone">
+            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" hidden>
+            <span>اسحب الملف هنا أو اضغط للاختيار (xlsx / xls / csv)</span>
+          </label>
+          <label class="month-field">الشهر
+            <input id="monthInput" placeholder="2025-01">
+          </label>
+        </div>
+        <div id="importMsg" class="msg"></div>
+        <div id="metaInfo" class="muted"></div>
+      </div>
+
+      <div class="card">
+        <h2>📊 ملخص التحليل</h2>
+        <div id="stats" class="stats"></div>
+      </div>
+
+      <div class="card">
+        <h2>👥 بيانات الموظفين</h2>
+        <div class="row">
+          <input id="searchInput" placeholder="🔎 بحث بالاسم أو اسم المستخدم...">
+          <button id="btnExport" class="btn">⬇️ تصدير Excel</button>
+          <button id="btnClear" class="btn danger">🗑️ حذف البيانات</button>
+        </div>
+        <div class="table-wrap">
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th>#</th><th>الاسم</th><th>الغياب</th><th>الخصم</th><th>الراتب</th>
+                <th>صافي (الملف)</th><th>الصافي المحسوب</th><th>المستخدم</th><th>التحقق</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🔐 حسابات المستخدمين</h2>
+        <p class="muted">يتم إنشاء حساب لكل صف تلقائياً عند الاستيراد (اسم المستخدم <code>emp1..empN</code>، كلمة المرور <code>1234</code>). يمكنك إضافة حساب يدوياً بشرط أن يطابق «الاسم الكامل» اسماً موجوداً في الملف.</p>
+        <div class="row">
+          <input id="newUserDisplay" placeholder="الاسم الكامل (كما في الملف)">
+          <input id="newUserUsername" placeholder="اسم المستخدم">
+          <input id="newUserPass" placeholder="كلمة المرور" type="text">
+          <select id="newUserRole">
+            <option value="user">موظف</option>
+            <option value="admin">مدير</option>
+          </select>
+          <button id="btnAddUser" class="btn primary">إضافة حساب</button>
+        </div>
+        <div id="addUserMsg" class="msg"></div>
+        <div class="table-wrap">
+          <table id="usersTable">
+            <thead>
+              <tr><th>اسم المستخدم</th><th>الاسم</th><th>الصلاحية</th><th>كلمة المرور</th><th>إجراءات</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- USER ---------- -->
+    <section id="userPanel" class="hidden">
+      <div class="card">
+        <h2>🧾 بيانات راتبك</h2>
+        <div id="userMeta" class="muted"></div>
+        <div id="userCard" style="margin-top:12px"></div>
+      </div>
+
+      <div class="card">
+        <h2>✅ التحقق من البيانات</h2>
+        <p class="muted">راجع بياناتك أعلاه ثم أكّد صحتها أو أرسل اعتراضاً للمدير.</p>
+        <textarea id="noteInput" rows="3" placeholder="ملاحظة / سبب الاعتراض (اختياري)"></textarea>
+        <div class="row" style="margin-top:12px">
+          <button id="btnOk" class="btn success">✔️ البيانات صحيحة</button>
+          <button id="btnObjection" class="btn danger">✖️ لدي اعتراض</button>
+        </div>
+        <div id="checkStatus" class="msg"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ==================== PASSWORD DIALOG ==================== -->
+<dialog id="passDialog">
+  <h3>تغيير كلمة المرور</h3>
+  <label>كلمة المرور الحالية <input type="password" id="oldPass"></label>
+  <label>كلمة المرور الجديدة <input type="password" id="newPass"></label>
+  <label>تأكيد كلمة المرور <input type="password" id="newPass2"></label>
+  <div id="passMsg" class="msg error"></div>
+  <menu>
+    <button id="passCancel" class="btn ghost" type="button">إلغاء</button>
+    <button id="passSave" class="btn primary" type="button">حفظ</button>
+  </menu>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
