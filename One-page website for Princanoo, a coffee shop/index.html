@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Princanoo — Coffee Shop</title>
+  <meta name="description" content="Princanoo coffee shop — specialty coffee, fresh pastries and a warm atmosphere. Order via WhatsApp or email. English & Arabic." />
+  <meta name="theme-color" content="#3e2723" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --brown:#3e2723; --coffee:#6f4e37; --cream:#faf6f0; --cream-2:#f2e9dd;
+      --gold:#d4a24e; --gold-dark:#b07f33; --text:#2b211c; --muted:#7c6b60;
+      --white:#fff; --green:#25d366; --radius:18px;
+      --shadow:0 10px 30px rgba(62,39,35,.08);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--cream);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+    html[dir="rtl"] body{font-family:"Cairo",system-ui,sans-serif}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none}
+    .container{width:min(1120px,92%);margin-inline:auto}
+    section{scroll-margin-top:84px}
+    .eyebrow{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+    html[dir="rtl"] .eyebrow{letter-spacing:0}
+
+    /* Header */
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(62,39,35,.08)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:13px}
+    .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:1.2rem;color:var(--brown)}
+    .brand-mark{font-size:1.35rem}
+    .nav{display:flex;gap:26px}
+    .nav a{font-size:.94rem;font-weight:500;color:var(--muted);transition:color .2s}
+    .nav a:hover{color:var(--coffee)}
+    .lang-toggle{font-family:inherit;font-size:.88rem;font-weight:600;color:var(--coffee);background:transparent;border:1.5px solid var(--coffee);border-radius:999px;padding:8px 18px;cursor:pointer;transition:.2s}
+    .lang-toggle:hover{background:var(--coffee);color:#fff}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden;padding-block:clamp(72px,11vw,120px);color:#fff;background:radial-gradient(130% 150% at 85% 5%,#7a5640 0%,#4a2f27 45%,#2e1b17 100%)}
+    .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 90%,rgba(212,162,78,.28),transparent 42%),radial-gradient(circle at 95% 8%,rgba(255,255,255,.10),transparent 32%)}
+    .hero-inner{position:relative;max-width:740px}
+    .hero h1{font-size:clamp(2.15rem,5.2vw,3.6rem);line-height:1.16;letter-spacing:-.5px;margin-top:14px}
+    html[dir="rtl"] .hero h1{letter-spacing:0;line-height:1.35}
+    .hero-text{color:rgba(255,255,255,.82);font-size:1.03rem;max-width:560px;margin:18px 0 34px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;border-radius:999px;font-size:.97rem;font-weight:600;transition:transform .2s,box-shadow .2s,background .2s}
+    .btn-primary{background:var(--gold);color:#2b211c}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(212,162,78,.38)}
+    .btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.35)}
+    .btn-ghost:hover{background:rgba(255,255,255,.2)}
+
+    /* Sections */
+    .section{padding-block:clamp(58px,9vw,88px)}
+    .section-head{text-align:center;max-width:620px;margin:0 auto clamp(34px,5vw,48px)}
+    .section-head .eyebrow{color:var(--gold-dark);margin-bottom:10px}
+    .section-head h2{font-size:clamp(1.65rem,3.4vw,2.35rem);line-height:1.22;letter-spacing:-.3px}
+    html[dir="rtl"] .section-head h2{letter-spacing:0;line-height:1.4}
+    .section-head p{margin-top:12px;color:var(--muted);font-size:.97rem}
+
+    /* About */
+    .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+    .about-text p{color:var(--muted);margin-bottom:16px}
+    .about-text p:last-child{margin-bottom:0}
+    .about-card{position:relative;overflow:hidden;padding:44px 36px;border-radius:24px;text-align:center;color:#fff;background:linear-gradient(160deg,#4a2f27,#2e1b17);box-shadow:var(--shadow)}
+    .about-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 12%,rgba(212,162,78,.3),transparent 48%);pointer-events:none}
+    .about-card .emoji{position:relative;font-size:2.8rem}
+    .about-card blockquote{position:relative;margin-top:14px;font-size:1.06rem;line-height:1.75;color:#f4eadd}
+
+    /* Menu */
+    .menu{background:var(--cream-2)}
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .menu-card{display:flex;flex-direction:column;gap:5px;padding:26px;border-radius:var(--radius);background:var(--white);border:1px solid rgba(62,39,35,.07);transition:transform .25s,box-shadow .25s}
+    .menu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .menu-emoji{font-size:1.45rem;margin-bottom:4px}
+    .menu-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+    .menu-name{font-weight:600;font-size:1.04rem}
+    .menu-price{font-weight:700;color:var(--gold-dark);white-space:nowrap}
+    .menu-desc{font-size:.89rem;color:var(--muted)}
+
+    /* Visit */
+    .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin-inline:auto}
+    .info-card{padding:30px;border-radius:var(--radius);background:var(--white);border:1px solid rgba(62,39,35,.07);box-shadow:var(--shadow)}
+    .info-icon{font-size:1.5rem;margin-bottom:8px}
+    .info-card h3{font-size:1.12rem;margin-bottom:14px}
+    .hours li{display:flex;justify-content:space-between;gap:16px;padding-block:9px;font-size:.94rem;color:var(--muted);border-bottom:1px dashed rgba(62,39,35,.16)}
+    .hours li:last-child{border-bottom:none;padding-bottom:0}
+    .hours li span:first-child{color:var(--text);font-weight:500}
+    .address{font-size:.95rem;color:var(--muted);margin-bottom:16px}
+    .link-arrow{font-size:.94rem;font-weight:600;color:var(--coffee)}
+    .link-arrow:hover{color:var(--gold-dark)}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px;margin-inline:auto}
+    .contact-card{display:flex;flex-direction:column;align-items:center;gap:9px;padding:42px 26px;border-radius:22px;text-align:center;background:var(--white);border:1px solid rgba(62,39,35,.07);box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+    .contact-card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(62,39,35,.14)}
+    .contact-icon{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;margin-bottom:4px}
+    .contact-card.wa .contact-icon{background:rgba(37,211,102,.13);color:#1ba84f}
+    .contact-card.mail .contact-icon{background:rgba(111,78,55,.1);color:var(--coffee)}
+    .contact-title{font-size:1.12rem;font-weight:600}
+    .contact-sub{font-size:.9rem;color:var(--muted)}
+
+    /* Footer */
+    .footer{padding-block:34px;text-align:center;font-size:.9rem;color:rgba(255,255,255,.72);background:var(--brown)}
+    .footer strong{color:#fff}
+    .footer-small{margin-top:6px;font-size:.82rem;color:rgba(255,255,255,.5)}
+
+    /* Floating WhatsApp */
+    .fab{position:fixed;inset-inline-end:22px;bottom:22px;z-index:80;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--green);color:#fff;box-shadow:0 10px 26px rgba(37,211,102,.45);transition:transform .2s}
+    .fab:hover{transform:scale(1.08)}
+
+    /* Responsive */
+    @media (max-width:860px){
+      .nav{display:none}
+      .about-grid,.visit-grid,.contact-grid{grid-template-columns:1fr}
+      .about-grid{gap:32px}
+      .contact-card{padding:34px 22px}
+    }
+    @media (max-width:480px){
+      .hero-actions .btn{flex:1 1 100%}
+      .fab{inset-inline-end:16px;bottom:16px;width:54px;height:54px}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand">
+        <span class="brand-mark">☕</span>
+        <span class="brand-name">Princanoo</span>
+      </a>
+      <nav class="nav">
+        <a href="#about" data-en="About" data-ar="عننا">About</a>
+        <a href="#menu" data-en="Menu" data-ar="المنيو">Menu</a>
+        <a href="#visit" data-en="Visit" data-ar="زيارتنا">Visit</a>
+        <a href="#contact" data-en="Contact" data-ar="تواصل">Contact</a>
+      </nav>
+      <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">العربية</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <span class="eyebrow" data-en="Specialty Coffee · Fresh Daily" data-ar="قهوة مختصة · طازجة يومياً">Specialty Coffee · Fresh Daily</span>
+          <h1 data-en="Your daily cup of calm." data-ar="فنجانك اليومي من الهدوء.">Your daily cup of calm.</h1>
+          <p class="hero-text" data-en="At Princanoo we brew specialty coffee with care — a warm corner to slow down, meet friends, or grab your morning cup." data-ar="في برينكانو نُحضّر القهوة المختصة بعناية — ركن دافئ لتستريح، تلتقي بالأصدقاء، أو تأخذ قهوة صباحك.">At Princanoo we brew specialty coffee with care — a warm corner to slow down, meet friends, or grab your morning cup.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary js-wa" href="#" target="_blank" rel="noopener" data-en="Order on WhatsApp" data-ar="اطلب عبر واتساب">Order on WhatsApp</a>
+            <a class="btn btn-ghost" href="#menu" data-en="View Menu" data-ar="شاهد المنيو">View Menu</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-en="Our Story" data-ar="قصتنا">Our Story</span>
+          <h2 data-en="Small shop, big love for coffee" data-ar="مقهى صغير، حب كبير للقهوة">Small shop, big love for coffee</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p data-en="Princanoo started as a simple idea: serve honest, well-made coffee in a place that feels like home. Every cup is brewed fresh, every guest is welcomed like a neighbor." data-ar="بدأ برينكانو بفكرة بسيطة: تقديم قهوة صادقة ومتقنة في مكان يشبه البيت. كل فنجان يُحضّر طازجاً، وكل ضيف يُستقبل كجار عزيز.">Princanoo started as a simple idea: serve honest, well-made coffee in a place that feels like home. Every cup is brewed fresh, every guest is welcomed like a neighbor.</p>
+            <p data-en="From classic espresso to creamy Spanish lattes and fresh pastries, our menu is short, focused, and made with quality ingredients." data-ar="من الإسبريسو الكلاسيكي إلى اللاتيه الإسباني الكريمي والمعجنات الطازجة، منيونا مختصر ومركّز ومصنوع من مكونات عالية الجودة.">From classic espresso to creamy Spanish lattes and fresh pastries, our menu is short, focused, and made with quality ingredients.</p>
+          </div>
+          <div class="about-card">
+            <div class="emoji">☕</div>
+            <blockquote data-en="“Good coffee, good mood.”" data-ar="«قهوة جيدة، مزاج أجمل.»">“Good coffee, good mood.”</blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="section menu">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-en="Menu" data-ar="المنيو">Menu</span>
+          <h2 data-en="Crafted with care" data-ar="مصنوع بعناية">Crafted with care</h2>
+          <p data-en="A few favorites — ask us about seasonal specials." data-ar="أبرز المفضلات — اسألنا عن العروض الموسمية.">A few favorites — ask us about seasonal specials.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <span class="menu-emoji">☕</span>
+            <div class="menu-top">
+              <span class="menu-name" data-en="Espresso" data-ar="إسبريسو">Espresso</span>
+              <span class="menu-price">10</span>
+            </div>
+            <span class="menu-desc" data-en="Rich, bold single shot." data-ar="جرعة غنية وقوية.">Rich, bold single shot.</span>
+          </article>
+          <article class="menu-card">
+            <span class="menu-emoji">🥛</span>
+            <div class="menu-top">
+              <span class="menu-name" data-en="Flat White" data-ar="فلات وايت">Flat White</span>
+              <span class="menu-price">16</span>
+            </div>
+            <span class="menu-desc" data-en="Smooth espresso with silky milk." data-ar="إسبريسو ناعم مع حليب حريري.">Smooth espresso with silky milk.</span>
+          </article>
+          <article class="menu-card">
+            <span class="menu-emoji">🍶</span>
+            <div class="menu-top">
+              <span class="menu-name" data-en="Cappuccino" data-ar="كابتشينو">Cappuccino</span>
+              <span class="menu-price">15</span>
+            </div>
+            <span class="menu-desc" data-en="Classic foam and perfect balance." data-ar="رغوة كلاسيكية وتوازن مثالي.">Classic foam and perfect balance.</span>
+          </article>
+          <article class="menu-card">
+            <span class="menu-emoji">🧊</span>
+            <div class="menu-top">
+              <span class="menu-name" data-en="Cold Brew" data-ar="كولد برو">Cold Brew</span>
+              <span class="menu-price">18</span>
+            </div>
+            <span class="menu-desc" data-en="Slow-steeped and refreshing." data-ar="منقوع ببطء ومنعش.">Slow-steeped and refreshing.</span>
+          </article>
+          <article class="menu-card">
+            <span class="menu-emoji">🥤</span>
+            <div class="menu-top">
+              <span class="menu-name" data-en="Spanish Latte" data-ar="لاتيه إسباني">Spanish Latte</span>
+              <span class="menu-price">20</span>
+            </div>
+            <span class="menu-desc" data-en="Sweet, creamy, comforting." data-ar="حلو وكريمي ومريح.">Sweet, creamy, comforting.</span>
+          </article>
+          <article class="menu-card">
+            <span class="menu-emoji">🥐</span>
+            <div class="menu-top">
+              <span class="menu-name" data-en="Croissant" data-ar="كرواسون">Croissant</span>
+              <span class="menu-price">12</span>
+            </div>
+            <span class="menu-desc" data-en="Buttery, flaky, baked fresh." data-ar="بالزبدة، مقرمش، طازج.">Buttery, flaky, baked fresh.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section id="visit" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-en="Visit us" data-ar="زورونا">Visit us</span>
+          <h2 data-en="Find us & say hi" data-ar="تجدنا وقل مرحباً">Find us & say hi</h2>
+        </div>
+        <div class="visit-grid">
+          <div class="info-card">
+            <div class="info-icon">🕒</div>
+            <h3 data-en="Opening Hours" data-ar="أوقات العمل">Opening Hours</h3>
+            <ul class="hours">
+              <li><span data-en="Sun – Thu" data-ar="الأحد – الخميس">Sun – Thu</span><span>7:00 – 23:00</span></li>
+              <li><span data-en="Fri – Sat" data-ar="الجمعة – السبت">Fri – Sat</span><span>8:00 – 00:00</span></li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <h3 data-en="Location" data-ar="الموقع">Location</h3>
+            <p class="address" data-en="123 Coffee Street, Your City" data-ar="شارع القهوة 123، مدينتك">123 Coffee Street, Your City</p>
+            <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=Princanoo+Coffee" target="_blank" rel="noopener" data-en="Get directions" data-ar="احصل على الاتجاهات">Get directions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section menu">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-en="Contact" data-ar="تواصل">Contact</span>
+          <h2 data-en="Order or say hello" data-ar="اطلب أو قل مرحباً">Order or say hello</h2>
+        </div>
+        <div class="contact-grid">
+          <a class="contact-card wa js-wa" href="#" target="_blank" rel="noopener">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </span>
+            <span class="contact-title" data-en="WhatsApp" data-ar="واتساب">WhatsApp</span>
+            <span class="contact-sub" data-en="Chat with us & order instantly" data-ar="راسلنا واطلب فوراً">Chat with us & order instantly</span>
+          </a>
+          <a class="contact-card mail js-mail" href="#">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <span class="contact-title" data-en="Email" data-ar="البريد الإلكتروني">Email</span>
+            <span class="contact-sub js-mail-text">hello@princanoo.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p><strong>Princanoo</strong> — <span data-en="brewed with love." data-ar="مُحضّر بحب.">brewed with love.</span></p>
+      <p class="footer-small" data-en="© 2025 Princanoo. All rights reserved." data-ar="© 2025 برينكانو. جميع الحقوق محفوظة.">© 2025 Princanoo. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp button -->
+  <a class="fab js-wa" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    /* ===== EDIT THESE 3 LINES ===== */
+    const WA_NUMBER = "201234567890"; // country code + number (no +, no spaces)
+    const EMAIL = "hello@princanoo.com";
+    const WA_MESSAGE = "Hello Princanoo! I'd like to place an order.";
+
+    // Build WhatsApp & Email links
+    document.querySelectorAll(".js-wa").forEach(function (a) {
+      a.href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(WA_MESSAGE);
+    });
+    document.querySelectorAll(".js-mail").forEach(function (a) {
+      a.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Order from Princanoo");
+    });
+    document.querySelectorAll(".js-mail-text").forEach(function (el) {
+      el.textContent = EMAIL;
+    });
+
+    // Language switcher (EN / AR + RTL)
+    function setLang(lang) {
+      const isAr = lang === "ar";
+      document.documentElement.lang = lang;
+      document.documentElement.dir = isAr ? "rtl" : "ltr";
+
+      document.querySelectorAll("[data-en]").forEach(function (el) {
+        const val = el.getAttribute("data-" + lang);
+        if (val !== null) el.textContent = val;
+      });
+
+      const toggle = document.getElementById("langToggle");
+      toggle.textContent = isAr ? "English" : "العربية";
+      toggle.setAttribute("aria-label", isAr ? "Switch to English" : "التبديل إلى العربية");
+
+      document.title = isAr ? "برينكانو — مقهى" : "Princanoo — Coffee Shop";
+
+      try { localStorage.setItem("princanoo-lang", lang); } catch (e) {}
+    }
+
+    document.getElementById("langToggle").addEventListener("click", function () {
+      setLang(document.documentElement.lang === "ar" ? "en" : "ar");
+    });
+
+    let saved = "en";
+    try { saved = localStorage.getItem("princanoo-lang") || "en"; } catch (e) {}
+    setLang(saved);
+  </script>
+</body>
+</html>
